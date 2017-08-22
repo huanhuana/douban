@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>douban</title>
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="douban.css">
+	<link rel="stylesheet" href="douban2.css">
+	<script src="./bootstrap/js/jquery-3.1.1.js"></script>
+	<script src="./bootstrap/js/bootstrap.min.js"></script>
+	<script src="./bootstrap/js/bootstrap-paginator.js"></script>
+</head>
+<body>
+	<div class="navigation">
+		<ul class="nav nav-pills prv">
+		  <li><a href="https://www.douban.com">豆瓣</a></li>
+		  <li><a href="https://book.douban.com">读书</a></li>
+		  <li><a href="https://move.douban.com">电影</a></li>
+		  <li><a href="https://music.douban.com">音乐</a></li>
+		  <li><a href="https://www.douban.com/location/">同城</a></li>
+		  <li><a href="https://www.douban.com/group/">小组</a></li>
+		  <li><a href="https://read.douban.com/?dcs=top-nav&dcm=douban">阅读</a></li>
+		  <li><a href="https://douban.fm/?from_=shire_top_nav">FM</a></li>
+		  <li><a href="https://dongxi.douban.com/?dcs=top-nav&dcm=douban">东西</a></li>
+		  <li><a href="https://market.douban.com/?utm_campaign=douban_top_nav&utm_source=douban&utm_medium=pc_web">市集</a></li>
+		  <li><a href="#more">更多</a></li>
+			<ul class="nav nav-pills aft">
+			  <li><a href="https://www.douban.com/doubanapp/app?channel=top-nav">下载客户端</a></li>
+			  <li><a href="https://www.douban.com/accounts/login?source=music">登录</a></li>
+			  <li><a href="https://www.douban.com/accounts/register?source=music">注册</a></li>			
+			</ul>
+		</ul>
+	</div>
+	<div id="db-nav-music">
+		<div class="nav-wrap">
+			<div class="nav-primary clear">
+				<div class="nav-logo">
+					<a href="https://music.douban.com">豆瓣音乐</a>
+				</div>
+				<div class="nav-search">
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="唱片名、表演者、条码、ISRC" aria-describedby="basic-addon2">
+					  <span class="input-group-addon search-iron" id="basic-addon2"></span>
+					</div>
+					<!-- <div class="search-text">
+						<div class="search-text-list clear">
+							<img src="" alt="">
+							<span>陈丽</span>
+							<span>(音乐人)</span>
+
+						</div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+					</div> -->
+					<a href="#" class="achor">
+						<img src="https://img3.doubanio.com/f/music/0b4dbb27aebf2dcc74e25009e1452d0ae5535c38/pics/music/annual2016.png" alt="豆瓣2016年度音乐榜单">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="nav-secondary">
+			<ul class="nav nav-pills">
+			  <li role="presentation"><a href="#">音乐人</a></li>
+			  <li role="presentation"><a href="#">金毛计划</a></li>
+			  <li role="presentation"><a href="#">排行榜</a></li>
+			  <li role="presentation"><a href="#">分类浏览</a></li>
+			  <li role="presentation"><a href="#">乐评</a></li>
+			  <li role="presentation"><a href="#">豆瓣FM</a></li>
+			  <li role="presentation"><a href="#">歌单</a></li>
+			  <li role="presentation"><a href="#">阿比鹿音乐奖</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		$('.form-control').on('keyup', function () {
+			var val = this.value;
+			if(val) {
+				// console.log('a' + val)
+				stragMess(val, creatList);
+			}else{
+				$('.search-text').remove();
+			}
+			$(this).on('change', function() {
+				window.location.href = "./douban2.html#" + this.value;
+			})
+		})
+		function stragMess(valueKey, handle) {
+			// console.log(handle);
+			$.ajax({
+					url: 'https://api.douban.com/v2/music/search',
+					type: 'GET',
+					dataType: 'jsonp',
+					data: {
+						q: valueKey
+					},
+					async: true,
+					success: function (dat) {handle(dat)},
+					error: function () {console.log('error')}
+				})
+		}
+		function creatList(obj) {
+			var inp = document.getElementsByClassName('input-group')[0];
+			var fra = document.createDocumentFragment();
+			var wra = document.createElement('div');
+			wra.className = 'search-text';
+			for(var i = 0; i < 6; i ++) {
+				// if(!obj.musics[i].image || !obj.musics[i].title) {
+				// 	break;
+				// }
+				if(obj.count == 0){
+					break;
+				}
+				var list = document.createElement('div');
+				var img = document.createElement('img');
+				var span1 = document.createElement('sapn');
+				var span2 = document.createElement('span');
+				list.className = 'search-text-list clear';
+				img.src = obj.musics[i].image;
+				span1.innerText = obj.musics[i].title;
+				span2.innerText = '(音乐人)';
+				list.appendChild(img);
+				list.appendChild(span1);
+				list.appendChild(span2);
+				wra.appendChild(list);
+			}
+			fra.appendChild(wra);
+			$('.achor').before($(fra));			
+		}
+	</script>
+	<div class="wrapper2">
+		<div class="content2">
+			<h1>豆瓣音乐搜索: 成都</h1>
+			<div class="body">
+				<div class="main">
+					<p class="ul first"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="" alt="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title"></a>
+							            <a class="start_radio" target="_blank" title="试听" href=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums"></span>
+							                <span class="pl"></span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<p class="ul"></p>
+					<table width="100%">
+						<tbody>
+							<tr class="item">
+								<td width="100" valign="top">
+					            	<a class="nbg"> <!-- 跳转-->
+					                	<img src="">
+					                </a>
+					            </td>
+					            <td valign="top">
+							        <div class="pl2">
+							        	<a href="" class="song-title">成都</a>
+							            <a class=""></a>
+							            <p class="pl"></p>
+					                    <div class="star clear">
+						                    <span class="allstar40"></span><!-- 星级的class-->
+						                    <span class="rating_nums">7.5</span>
+							                <span class="pl">(4325人评价)</span>
+						                </div>
+							        </div>
+						        </td>      
+							</tr>
+						</tbody>
+					</table>
+					<!--生成列表-->
+					<script>
+						var reg = /#([\u4e00-\u9fa5]+)/g;
+						var key = window.location.href.split(reg)[1];
+						var count = 0;
+						if(key){
+							stragMess(key, para(1));							
+						}
+						function para(num) {
+
+							return function changList(obj2) {
+								var len2 = (obj2.count < 10) ? obj2.count : 10;
+								for(var j = 0; j < len2; j ++) {
+									newMess(getList, obj2.musics[j + (num - 1) *10].id, j);								
+								}
+								count = Math.ceil(obj2.count/10);
+							}
+						}
+						function getList(obj3, index) {
+							$('.nbg img')[index].src = obj3.image;
+							$('.song-title')[index].innerText = obj3.title;
+							$('p.pl')[index].innerText = obj3.summary;
+							$('.nbg')[index].href = obj3.alt;
+						}
+						function newMess(callback, songId, k) {
+							$.ajax({
+								url: 'https://api.douban.com/v2/music/' + songId,
+								type: 'GET',
+								dataType: 'jsonp',
+								async: true,
+								success: function (dat) {callback(dat, k)},
+								error: function () {console.log('error')}
+							})
+						}
+					</script>
+					<div class="pageLimit">
+						<ul id="pageLimit"></ul>
+					</div>
+					<!--分页组件-->
+					<script>
+						
+						$('#pageLimit').bootstrapPaginator({    
+						    currentPage: 1,    
+						    totalPages: count,    
+						    size:"normal",    
+						    bootstrapMajorVersion: 3,    
+						    alignment:"right",    
+						    numberOfPages:5,    
+						    itemTexts: function (type, page, current) {        
+						        switch (type) {            
+						        case "first": return "首页";            
+						        case "prev": return "上一页";            
+						        case "next": return "下一页";            
+						        case "last": return "末页";            
+						        case "page": return page;
+						        }
+						    },
+						    onPageClicked: function (event, originalEvent, type, page) {
+						    	stragMess(key, para(page));
+						    }
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>

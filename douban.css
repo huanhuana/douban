@@ -1,0 +1,522 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+body, td, th {
+    font: 12px Helvetica,Arial,sans-serif;
+    line-height: 1.62;
+}
+h2 {
+    font: 15px Arial, Helvetica, sans-serif;
+    color: #072;
+    margin: 0 0 12px 0;
+    line-height: 150%;
+}
+table {
+    border-collapse: collapse;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+a:hover {
+    color: #FFFFFF;
+    text-decoration: none;
+    background: #37a;
+}
+.clear::after {
+	content: " ";
+	clear: both;
+	display: block;
+}
+.navigation {
+    background-color: #545652;
+    width: 1366px;
+    min-width: 950px;
+    /*line-height: 28px;*/
+}
+.navigation .prv a:hover {
+	color: #545652;
+}
+.prv li a, .prv li{
+	height: 28px;
+	/*line-height: 100%;*/
+}
+.prv li {
+	line-height: 28px;
+}
+.navigation .prv li a {
+    color: #d5d5d5;
+	padding: 0 12px;
+	font-size: 12px;
+}
+.aft {
+	position: absolute;
+	right: 12px;
+}
+#db-nav-music {
+    background: #f0f3ef;
+}
+#db-nav-music .nav-wrap {
+    border-color: #e3e9e2;
+    border-bottom: 1px solid #e5ebe4;
+}
+.nav-primary {
+	position: relative;
+	padding: 10px 0 5px;
+	width: 950px;
+    margin: 0 auto;
+}
+.nav-logo {
+	float: left;
+    height: 56px;
+    width: 145px;
+    margin: 0 13px 0 0;
+    background: url(https://img3.doubanio.com/f/shire/790e584d54485ea8ca1759469ffcfa54e6bb64ea/pics/nav/lg_music_a12_2.png) no-repeat 0 12px;
+}
+.nav-logo a{
+    color: #555d53;
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    line-height: 100em;
+}
+.nav-search {
+	margin-left: 145px;
+	margin-top: 10px;
+	width: 507px;
+}
+.nav-search .search-iron {
+	background: url(https://img3.doubanio.com/f/shire/b78a848a3825bda97797e3c1816ad3b01139aa1c/pics/nav1/nav_mu_bg.png) no-repeat 0 -40px;
+	padding-right: 24px;
+}
+.nav-search a{
+	position: absolute;
+    top: 8px;
+    right: 50px;
+    background: transparent !important;
+}
+.nav-search img {
+	height: 90px;
+    margin-top: 2px;
+}
+.nav-secondary {
+    width: 950px;
+    margin: 0 auto;
+    padding-bottom: 0;
+    overflow: hidden;
+    zoom: 1;
+}
+.nav-secondary li a {
+	color: #555d53;
+}
+#db-nav-music {
+	margin-bottom: 40px;
+}
+#db-nav-music .nav-secondary li a:hover {
+	background-color: #555d53;
+    color: #fff;
+}
+#wrapper {
+    width: 950px;
+    margin: 0 auto;
+}
+#content {
+    min-height: 420px;
+}
+.article {
+	float: left;
+    width: 590px;
+}
+#content #myCarousel .prv {
+	background: url(https://img3.doubanio.com/f/music/f7a7edb086efd2b104a547882609d490a701dc00/pics/music/home/banner_arrow.png) no-repeat;
+	top: 50%;
+	width: 36px;
+    height: 51px;
+    margin-top: -25px;
+}
+#content #myCarousel .next {
+	background: url(https://img3.doubanio.com/f/music/f7a7edb086efd2b104a547882609d490a701dc00/pics/music/home/banner_arrow.png) no-repeat -51px 0;
+	top: 50%;
+	width: 36px;
+    height: 51px;
+    margin-top: -25px;
+}
+#content .aside {
+	float: right;
+	width: 310px;
+}
+.join {
+    margin-bottom: 30px;
+}
+.join .join-block {
+    float: left;
+    width: 102px;
+    margin-right: 2px;
+    height: 57px;
+    background-color: #F5F7F8;
+    text-align: center;
+}
+.join .join-block h2 {
+    margin: 9px 0 0 0;
+    font: 15px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+}
+.join .join-block h2 a {
+    color: #072;
+    font-size: 16px;
+    font-weight: bold;
+}
+.join .join-block p {
+    margin: 0px;
+    font-size: 14px;
+    color: #666;
+}
+.join .join-block-last {
+    margin-right: 0;
+}
+.join .joinit {
+    background-color: #139D72;
+    height: 38px;
+}
+.join .joinit:hover {
+    background-color: #139D72;
+    opacity: .8;
+}
+.tag-block {
+    width: 300px;
+}
+.tag-block .tag-header {
+    font-size: 14px;
+    color: #222;
+    float: left;
+}
+.tag-block .tag-more {
+    float: right;
+    width: 30px;
+}
+.tag-block .tag-more a {
+    font-size: 12px;
+    color: #999;
+    line-height: 22px;
+}
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.tag-block table {
+    width: 300px;
+}
+.tag-block table th, .tag-block table td {
+    width: 150px;
+    border-top: 1px solid #F8F6F6;
+    border-bottom: 1px solid #F8F6F6;
+    border-right: 1px solid #F8F6F6;
+}
+.tag-block table th a, .tag-block table td a {
+    display: block;
+    height: 36px;
+    line-height: 36px;
+    color: #138A64;
+    font-size: 14px;
+    padding-left: 6px;
+}
+.tag-block table th a:hover, .tag-block table td a:hover {
+    background-color: #F5F7F8;
+}
+.hot-artist-songs {
+    margin-bottom: 40px;
+}
+.side-block {
+    margin-top: 30px;
+    max-width: 304px;
+}
+.side-block .header {
+    font-size: 14px;
+    color: #222;
+    line-height: 25px;
+    border-bottom: 1px solid #E4E2E2;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+    position: relative;
+    vertical-align: middle;
+}
+.side-block .play-button {
+    background: #139D72;
+    border: 1px solid #138A64;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #FFF;
+    line-height: 23px;
+    width: 88px;
+    height: 23px;
+    display: inline-block;
+    text-align: center;
+    float: right;
+}
+.side-block .play-button i.icon-play {
+    font-size: 10px;
+}
+.icon {
+    font-family: 'fontello';
+    font-style: normal;
+}
+.icon-play {
+    background: url(https://img3.doubanio.com/f/shire/b8d0a75490599fb542136854b874918446ef98c1/pics/playicon.png) no-repeat;
+}
+.hot-artist-songs {
+    margin-bottom: 40px;
+}
+.artist-song {
+    position: relative;
+    padding-left: 60px;
+    list-style: none;
+    height: 60px;
+}
+.artist-song .avatar {
+    position: absolute;
+    left: 2px;
+    top: 6px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    overflow: hidden;
+    line-height: 48px;
+    text-align: center;
+}
+.artist-song .avatar img {
+    width: 48px;
+    height: 48px;
+}
+.artist-song .avatar .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 48px;
+    height: 48px;
+}
+.artist-song .avatar i.icon-play {
+    border-style: solid;
+    border-width: 5px 0 5px 8px;
+    line-height: 0px;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    display: inline-block;
+    zoom: 1;
+    border-color: transparent;
+}
+.artist-song h3 {
+    background-color: transparent;
+    font-size: 14px;
+    color: #138A64;
+    line-height: 14px;
+    padding: 12px 0 8px 0;
+    margin: 0;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font: 14px Arial, Helvetica, sans-serif;
+}
+.artist-song p {
+    font-size: 12px;
+    color: #999;
+    line-height: 12px;
+    padding: 0;
+    margin: 0;
+}
+.artist-song span.rank {
+    position: absolute;
+    height: 100%;
+    right: 10px;
+    top: 0;
+    font-weight: normal;
+    font-size: 34px;
+    color: #E6E6E6;
+    line-height: 60px;
+}
+ul.section-titles {
+    list-style: none;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+ul.section-titles li, ul.section-titles li a {
+    font-weight: normal;
+}
+ul.section-titles li {
+    display: inline-block;
+    font-size: 12px;
+}
+ul.section-titles li.on a {
+    color: #138A64;
+    font-weight: bolder;
+}
+ul.section-titles li:before {
+    content: ' |';
+    color: #222;
+    padding: 0 3px;
+}
+ul.section-titles li:first-child:before {
+    content: '';
+    color: transparent;
+}
+.popular-artists.section {
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+.popular-artists.section .header {
+    border-bottom: 2px solid #02A682;
+}
+.popular-artists.section .header li {
+    display: inline-block;
+    font-size: 16px;
+    color: #222;
+    line-height: 30px;
+    margin: 0px;
+    cursor: pointer;
+}
+.popular-artists.section .header li.deactivated {
+    font-size: 13px;
+    color: #999;
+}
+.popular-artists.section .artists, .popular-artists.section .new-artists {
+    text-align: center;
+    background: #F5F7F8;
+    padding: 15px 0px 0px 10px;
+    width: 590px;
+}
+.player-round-btn-bg {
+    position: absolute;
+    top: 0;
+    left: 16px;
+    width: 79%;
+    height: 84%;
+    cursor: pointer;
+    zoom: 1;
+    border: none;
+}
+.player-round-btn-bg .hoverlay{
+	display: none;
+    padding: 14px;
+}
+.player-round-btn-bg.hover .hoverlay {
+	display: block;
+}
+.artists .row .hoverlay p {
+    display: block;
+    position: relative;
+    text-align: left;
+    font-size: 12px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #FFF;
+    overflow: hidden;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.player-round-btn-bg.hover .hoverlay p {
+	opacity: 1;
+}
+.span-player-round-btn {
+	position: absolute;
+    right: 25px;
+    bottom: 30px;
+    top: auto;
+    left: auto;
+    width: 20px;
+    height: 20px;
+    margin: -8px 0 0 -8px;
+    background: #222 !important;
+    opacity: .95;
+    border-radius: 100%;
+    text-align: center;
+    zoom: 1;
+}
+.player-round-btn-bg.hover .span-player-round-btn {
+	background: #fff !important;
+}
+.span-player-round-btn .icon-player-round-btn {
+    display: inline-block;
+    zoom: 1;
+    vertical-align: top;
+    margin: 5px 0 0 2px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 5px 0 5px 8px;
+    line-height: 0px;
+    border-color: transparent transparent transparent #ffffff;
+}
+.player-round-btn-bg.hover .span-player-round-btn .icon-player-round-btn {
+	border-color: transparent transparent transparent #000000;
+}
+.player-round-btn-bg.hover {
+	background: #333 !important;
+	opacity: .85;
+}
+.editor-featured.section {
+    overflow: hidden;
+}
+.editor-featured.section .header {
+    border-bottom: 2px solid #02A682;
+}
+.editor-featured.section .header h2 {
+    font-size: 16px;
+    color: #222;
+    line-height: 30px;
+    margin: 0px;
+}
+.editor-featured.section .features {
+    background: #F5F7F8;
+    padding: 15px 0px 15px 10px;
+    width: 595px;
+}
+.slick-slider {
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    user-select: none;
+    touch-action: pan-y;
+    margin-bottom: 30px;
+}
+.search-text {
+	position: absolute;
+	/*top: 0;*/
+	left: 158px;
+	z-index: 999;
+	width: 457px;
+	height: 300px;
+	border-radius: 5px;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+.search-text-list {
+	height: 50px;
+	width: 100%;
+	box-sizing: border-box;
+	border-bottom: 1px solid #ccc;
+}
+/*.text-list-a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+*/.search-text-list img {
+	float: left;
+	height: 40px;
+	width: 40px;
+	/*background-color: red;*/
+	margin: 5px;
+}
+.search-text-list span:first-of-type {
+	color: #037;
+}
+.search-text-list span {
+	font-size: 12px;
+	color: #666;
+}

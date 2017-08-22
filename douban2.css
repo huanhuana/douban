@@ -1,0 +1,110 @@
+.wrapper2 {
+    width: 950px;
+    margin: 0 auto;
+}
+.content2 {
+    min-height: 420px;
+}
+h1 {
+    word-wrap: break-word;
+    display: block;
+    font-size: 25px;
+    font-weight: bold;
+    color: #494949;
+    margin: 0;
+    padding: 0 0 15px 0;
+    line-height: 1.1;
+}
+table {
+    border-collapse: collapse;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+.content2 .main {
+    float: left;
+    width: 590px;
+    padding-right: 40px;
+}
+.ul {
+    border-bottom: 1px dashed #DDDDDD;
+    line-height: 100%;
+    clear: both;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+p.first {
+    margin-top: 0;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+body, td, th {
+    font: 12px Helvetica,Arial,sans-serif;
+    line-height: 1.62;
+}
+a img {
+    border-width: 0;
+    vertical-align: middle;
+}
+.pl2 {
+    font: 14px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color: #666666;
+}
+tr.item .start_radio {
+    margin-left: 16px;
+    margin-bottom: -4px;
+}
+a.start_radio {
+    background: url(https://img3.doubanio.com/f/music/a724183a5cda626642968c5e6c197a13068cd8dd/pics/music/search/play-album.png);
+    background-position: 0 -23px;
+    display: inline-block;
+    width: 19px;
+    height: 19px;
+}
+.pl {
+    font: 12px Arial, Helvetica, sans-serif;
+    line-height: 150%;
+    color: #666666;
+}
+.pl2 p.pl {
+	margin-top: 10px;
+	height: 18px;
+	width: 450px;
+	overflow: hidden;
+}
+.allstar40 {
+    background-position: 0 -22px;
+}
+.rating_nums {
+    padding-left: 0;
+}
+.rating_nums, .rating_num {
+    color: #e09015;
+    font-size: 12px;
+    padding: 0 3px;
+}
+.star span:first-child {
+	display: inline-block;
+    zoom: 1;
+    width: 55px;
+    height: 11px;
+    margin: 0 3px 0 0;
+    overflow: hidden;
+    background: url(https://img3.doubanio.com/f/shire/b8f4c3672ef81106701071831e22422a745d3b74/pics/rating_icons/ic_rating_s.png) no-repeat;
+}
+.paginator {
+    font: 14px Arial, Helvetica, sans-serif;
+    color: #aaa;
+    margin: 20px 0;
+    line-height: 150%;
+    text-align: center;
+}

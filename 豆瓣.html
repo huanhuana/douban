@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>douban</title>
+	<link rel="stylesheet" href="douban.css">
+	<link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
+	<script src="./bootstrap/js/jquery-3.1.1.js"></script>
+	<script src="./bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="navigation">
+		<ul class="nav nav-pills prv">
+		  <li><a href="https://www.douban.com">豆瓣</a></li>
+		  <li><a href="https://book.douban.com">读书</a></li>
+		  <li><a href="https://move.douban.com">电影</a></li>
+		  <li><a href="https://music.douban.com">音乐</a></li>
+		  <li><a href="https://www.douban.com/location/">同城</a></li>
+		  <li><a href="https://www.douban.com/group/">小组</a></li>
+		  <li><a href="https://read.douban.com/?dcs=top-nav&dcm=douban">阅读</a></li>
+		  <li><a href="https://douban.fm/?from_=shire_top_nav">FM</a></li>
+		  <li><a href="https://dongxi.douban.com/?dcs=top-nav&dcm=douban">东西</a></li>
+		  <li><a href="https://market.douban.com/?utm_campaign=douban_top_nav&utm_source=douban&utm_medium=pc_web">市集</a></li>
+		  <li><a href="#more">更多</a></li>
+			<ul class="nav nav-pills aft">
+			  <li><a href="https://www.douban.com/doubanapp/app?channel=top-nav">下载客户端</a></li>
+			  <li><a href="https://www.douban.com/accounts/login?source=music">登录</a></li>
+			  <li><a href="https://www.douban.com/accounts/register?source=music">注册</a></li>			
+			</ul>
+		</ul>
+	</div>
+	<div id="db-nav-music">
+		<div class="nav-wrap">
+			<div class="nav-primary clear">
+				<div class="nav-logo">
+					<a href="https://music.douban.com">豆瓣音乐</a>
+				</div>
+				<div class="nav-search">
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="唱片名、表演者、条码、ISRC" aria-describedby="basic-addon2">
+					  <span class="input-group-addon search-iron" id="basic-addon2"></span>
+					</div>
+					<!-- <div class="search-text">
+						<div class="search-text-list">
+							<a href="" class="text-list-a clear">
+								<img src="https://img3.doubanio.com/spic/s29114672.jpg" alt="">
+								<span>陈丽</span>
+								<span>(音乐人)</span>
+							</a>
+						</div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+						<div class="search-text-list"></div>
+					</div> -->
+					<a href="#" class="achor">
+						<img src="https://img3.doubanio.com/f/music/0b4dbb27aebf2dcc74e25009e1452d0ae5535c38/pics/music/annual2016.png" alt="豆瓣2016年度音乐榜单">
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="nav-secondary">
+			<ul class="nav nav-pills">
+			  <li role="presentation"><a href="#">音乐人</a></li>
+			  <li role="presentation"><a href="#">金毛计划</a></li>
+			  <li role="presentation"><a href="#">排行榜</a></li>
+			  <li role="presentation"><a href="#">分类浏览</a></li>
+			  <li role="presentation"><a href="#">乐评</a></li>
+			  <li role="presentation"><a href="#">豆瓣FM</a></li>
+			  <li role="presentation"><a href="#">歌单</a></li>
+			  <li role="presentation"><a href="#">阿比鹿音乐奖</a></li>
+			</ul>
+		</div>
+	</div>
+	<script>
+		$('.form-control').on('keyup', function () {
+			var val = this.value;
+			if(val) {
+				$.ajax({
+					url: 'https://api.douban.com/v2/music/search',
+					type: 'GET',
+					dataType: 'jsonp',
+					data: {
+						q: val
+					},
+					async: true,
+					success: function (dat) {creatList(dat)},
+					error: function () {console.log('error')}
+				})
+			}else{
+				$('.search-text').remove();
+			}
+			$(this).on('change', function() {
+				window.location.href = "./douban2.html#" + this.value;
+			})
+		})
+		function creatList(obj) {
+			var inp = document.getElementsByClassName('input-group')[0];
+			var fra = document.createDocumentFragment();
+			var wra = document.createElement('div');
+			wra.className = 'search-text';
+			for(var i = 0; i < 6; i ++) {
+				if(!obj.musics[i].image || !obj.musics[i].title) {
+					break;
+				}
+				var list = document.createElement('div');
+				var img = document.createElement('img');
+				var span1 = document.createElement('sapn');
+				var span2 = document.createElement('span');
+				list.className = 'search-text-list clear';
+				img.src = obj.musics[i].image;
+				span1.innerText = obj.musics[i].title;
+				span2.innerText = '(音乐人)';
+				list.appendChild(img);
+				list.appendChild(span1);
+				list.appendChild(span2);
+				wra.appendChild(list);
+			}
+			fra.appendChild(wra);
+			$('.achor').before($(fra));			
+		}
+	</script>
+	<div id="wrapper">
+		<div id="content">
+			<div class="clear">
+				<div class="article">
+					<div id="myCarousel" class="carousel slide" style="margin-bottom: 30px">
+						<!-- 轮播（Carousel）指标 -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1">
+								
+							</li>
+							<li data-target="#myCarousel" data-slide-to="2">
+								
+							</li>
+						</ol>  
+					   <!-- 轮播（Carousel）项目 -->
+						<div class="carousel-inner">
+						    <div class="item active">
+						        <img src="https://img3.doubanio.com/view/music_index_banner/raw/public/banner-2443.jpg" alt="yeah">
+						    </div>
+						    <div class="item">
+						    	<img src="https://img3.doubanio.com/view/music_index_banner/raw/public/banner-2430.jpg" alt="yeah">
+						    </div>
+						    <div class="item">
+						    	<img src="https://img3.doubanio.com/view/music_index_banner/raw/public/banner-2441.jpg" alt="yeah">
+						    </div>
+						</div>
+					        <!-- 轮播（Carousel）导航 -->
+					        <a class="carousel-control left prv" href="#myCarousel" data-slide="prev"></a>
+					        <a class="carousel-control right next" href="#myCarousel" data-slide="next"></a>
+					</div>
+					<div class="popular-artists section">
+						<ul class="header">
+							<li class="artists-tab">本周流行音乐人</li>
+							|
+							<li class="new-artists-tab deactivated">上升最快音乐人</li>
+						</ul>
+						<div class="artists">
+							<div class="row">
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img1.doubanio.com/view/site/median/public/201392e5209f988.jpg" alt="">
+										<div class="player-round-btn-bg">
+											<div class="hoverlay">
+												<p>今夜的阳</p>
+												<p>杭州</p>
+												<p>愁云</p>
+												<p>给你唱支歌</p>
+											</div>
+							                <span class="span-player-round-btn">
+							                	<i class="icon-player-round-btn"></i>
+						                	</span>
+							            </div>
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img1.doubanio.com/view/site/median/public/fc00cb95a9b74d9.jpg" alt="...">
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img1.doubanio.com/view/site/median/public/f788123243562e7.jpg" alt="...">
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img1.doubanio.com/view/site/median/public/e42048046e31b27.jpg" alt="...">
+									</a>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img3.doubanio.com/view/site/median/public/bc7f9fe3cf97f2e.jpg" alt="">
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img3.doubanio.com/view/site/median/public/420158625cd53c0.jpg" alt="...">
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img1.doubanio.com/view/site/median/public/c083d9c5d4a2ba7.jpg" alt="...">
+									</a>
+								</div>
+								<div class="col-xs-6 col-md-3">
+									<a href="#" class="thumbnail">
+										<img src="https://img3.doubanio.com/view/site/median/public/5cd8c44b1fd10c5.jpg" alt="...">
+									</a>
+								</div>
+							</div>
+							<script>
+								$('.player-round-btn-bg').on('mouseenter', function () {
+									this.className = 'player-round-btn-bg hover';
+									$(this).on('mouseleave', function () {
+										this.className = 'player-round-btn-bg';
+									})
+								})
+							</script>
+						</div>
+					</div>
+					<div class="editor-featured section">
+						<div class="header">
+						    <h2>编辑推荐</h2>
+						</div>
+						<div class="slick features slick-initialized slick-slider">
+							<div id="myCarousel1" class="carousel slide"> 
+							    <!-- 轮播（Carousel）项目 -->
+							    <div class="carousel-inner">
+							        <div class="item active">							       
+							        	<div class="row">
+							                <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img3.doubanio.com/view/music_index_feature/mid/public/c48792.jpg" alt="songs">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img1.doubanio.com/view/music_index_feature/mid/public/c48837.jpg" alt="通用的占位符缩略图">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img1.doubanio.com/view/music_index_feature/mid/public/c48977.jpg" alt="通用的占位符缩略图">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+									    </div>
+							        </div>
+							        <div class="item">							        	
+							            <div class="row">
+							                <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img3.doubanio.com/view/music_index_feature/mid/public/c48602.jpg" alt="songs">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img1.doubanio.com/view/music_index_feature/mid/public/c48429.jpg" alt="通用的占位符缩略图">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+										    <div class="col-sm-6 col-md-4">
+										        <div class="thumbnail">
+										            <img src="https://img1.doubanio.com/view/music_index_feature/mid/public/c48527.jpg" alt="通用的占位符缩略图">
+										            <div class="caption">
+										                <p>【音乐人】</p>
+										                <h4>14人关注</h4>
+										                <p>长沙民谣团体，有着俏皮的调子，好听的手风琴，而歌词却是真的有点丧。</p>
+										            </div>
+										        </div>
+										    </div>
+									    </div>
+							        </div>
+							    </div>
+							    <!-- 轮播（Carousel）导航 -->
+							    <a class="carousel-control left" href="#myCarousel1" 
+							        data-slide="prev">&lsaquo;
+							    </a>
+							    <a class="carousel-control right" href="#myCarousel1" 
+							        data-slide="next">&rsaquo;
+							    </a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="aside">
+					<div class="join clear">
+						<div class="join-block">
+				            <h2><a href="/artists/genre_page/6/" class="primary-link" target="_blank">41126</a></h2>
+				            <p>音乐人</p>
+				        </div><div class="join-block">
+				            <h2><a href="/artists/genre_page/6/" class="primary-link" target="_blank">2519</a></h2>
+				            <p>博客</p>
+				        </div><div class="join-block join-block-last">
+				            <h2><a href="/artists/genre_page/6/" class="primary-link" target="_blank">986</a></h2>
+				            <p>厂牌</p>
+				        </div>
+				        <button type="button" class="btn btn-success btn-block joinit">我要加入</button>
+					</div>
+					<div class="tag-block">
+						<div class="tag-header">热门音乐人分类</div>
+						<div class="tag-more"><a href="/artists/tag/">更多</a></div>
+						<div class="clearfix"></div>
+						<table>
+							<tbody>
+							    <tr>
+							        <th><a href="/artists/genre_page/6/" target="_blank">流行</a></th>
+							        <td><a href="/artists/genre_page/2/" target="_blank">轻音乐</a></td>
+							    </tr>
+							    <tr>
+							        <th><a href="/artists/genre_page/8/" target="_blank">摇滚</a></th>
+							        <td><a href="/artists/genre_page/1/" target="_blank">古典</a></td>
+							    </tr>
+							    <tr>
+							        <th><a href="/artists/genre_page/3/" target="_blank">电子</a></td>
+							        <td><a href="/artists/genre_page/10/" target="_blank">世界音乐</a></td>
+							    </tr>
+							    <tr>
+							        <th><a href="/artists/genre_page/4/" target="_blank">民谣</a></td>
+							        <td><a href="/artists/genre_page/7/" target="_blank">说唱</a></td>
+							    </tr>
+							    <tr>
+							        <th><a href="/artists/genre_page/5/" target="_blank">爵士</a></td>
+							        <td><a href="/artists/genre_page/9/" target="_blank">原声</a></td>
+							    </tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="hot-artist-songs">
+						<div class="side-block">
+							<div class="header">
+								<span data-reactid=".2.0.0">本周单曲榜</span>
+								<a class="play-button" data-reactid=".2.0.1">
+									<i class="icon icon-play" data-reactid=".2.0.1.0"></i>
+									<span data-reactid=".2.0.1.1">&nbsp; 播放全部</span>
+								</a>
+							</div>
+							<div class="content">
+								<ul class="section-titles" data-reactid=".2.1.0">
+									<li class="on" data-reactid=".2.1.0.$0"><a href="#" data-reactid=".2.1.0.$0.0">最热</a>
+									</li>
+									<li class="" data-reactid=".2.1.0.$1"><a href="#" data-reactid=".2.1.0.$1.0">摇滚</a></li><li class="" data-reactid=".2.1.0.$2"><a href="#" data-reactid=".2.1.0.$2.0">民谣</a></li><li class="" data-reactid=".2.1.0.$3"><a href="#" data-reactid=".2.1.0.$3.0">流行</a></li><li class="" data-reactid=".2.1.0.$4"><a href="#" data-reactid=".2.1.0.$4.0">电子</a></li>
+								</ul>
+					            <ul class="hot-artist-songs" data-reactid=".2.1.1">
+					            	<li class="artist-song" data-reactid=".2.1.1.0">
+					            		<div class="avatar" data-reactid=".2.1.1.0.0">
+					            			<img src="https://img1.doubanio.com/view/site/small/public/f788123243562e7.jpg" data-reactid=".2.1.1.0.0.0">
+					            			<span class="icon" data-reactid=".2.1.1.0.0.1">
+					            				<i class="icon-play" data-reactid=".2.1.1.0.0.1.0"></i>
+				            				</span>
+			            				</div>
+			            				<h3 data-reactid=".2.1.1.0.1">还乡去</h3>
+			            				<p data-reactid=".2.1.1.0.2">
+			            					<span data-reactid=".2.1.1.0.2.0">陈鸿宇</span>
+			            					<span data-reactid=".2.1.1.0.2.1"> / </span>
+			            					<span data-reactid=".2.1.1.0.2.2">6224</span>
+			            					<span data-reactid=".2.1.1.0.2.3">次播放</span>
+		            					</p>
+		            					<span class="rank" data-reactid=".2.1.1.0.3">1</span>
+	            					</li>
+	            					<li class="artist-song" data-reactid=".2.1.1.1">
+	            						<div class="avatar" data-reactid=".2.1.1.1.0">
+	            							<img src="https://img3.doubanio.com/view/sitesong/small/public/1490333010.jpg" data-reactid=".2.1.1.1.0.0">
+	            							<span class="icon" data-reactid=".2.1.1.1.0.1">
+	            								<i class="icon-play" data-reactid=".2.1.1.1.0.1.0"></i>
+            								</span>
+        								</div>
+        								<h3 data-reactid=".2.1.1.1.1">去你的撩妹即正义</h3>
+        								<p data-reactid=".2.1.1.1.2">
+        									<span data-reactid=".2.1.1.1.2.0">放肆的肆</span>
+        									<span data-reactid=".2.1.1.1.2.1"> / </span>
+        									<span data-reactid=".2.1.1.1.2.2">3218</span>
+        									<span data-reactid=".2.1.1.1.2.3">次播放</span>
+    									</p>
+    									<span class="rank" data-reactid=".2.1.1.1.3">2</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.2">
+										<div class="avatar" data-reactid=".2.1.1.2.0">
+											<img src="https://img1.doubanio.com/spic/s29327517.jpg" data-reactid=".2.1.1.2.0.0">
+											<span class="icon" data-reactid=".2.1.1.2.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.2.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.2.1">今夜的阳</h3>
+										<p data-reactid=".2.1.1.2.2">
+											<span data-reactid=".2.1.1.2.2.0">佟妍</span>
+											<span data-reactid=".2.1.1.2.2.1"> / </span>
+											<span data-reactid=".2.1.1.2.2.2">4380</span>
+											<span data-reactid=".2.1.1.2.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.2.3">3</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.3">
+										<div class="avatar" data-reactid=".2.1.1.3.0">
+											<img src="https://img3.doubanio.com/view/sitesong/small/public/1488514112.jpg" data-reactid=".2.1.1.3.0.0">
+											<span class="icon" data-reactid=".2.1.1.3.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.3.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.3.1">马 horse (Soulspeak remix)</h3>
+										<p data-reactid=".2.1.1.3.2">
+											<span data-reactid=".2.1.1.3.2.0">Duck Fight Goose</span>
+											<span data-reactid=".2.1.1.3.2.1"> / </span>
+											<span data-reactid=".2.1.1.3.2.2">5541</span>
+											<span data-reactid=".2.1.1.3.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.3.3">4</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.4">
+										<div class="avatar" data-reactid=".2.1.1.4.0">
+											<img src="https://img1.doubanio.com/spic/s29380197.jpg" data-reactid=".2.1.1.4.0.0">
+											<span class="icon" data-reactid=".2.1.1.4.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.4.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.4.1">电动少女</h3>
+										<p data-reactid=".2.1.1.4.2">
+											<span data-reactid=".2.1.1.4.2.0">Chinese Football</span>
+											<span data-reactid=".2.1.1.4.2.1"> / </span>
+											<span data-reactid=".2.1.1.4.2.2">4224</span>
+											<span data-reactid=".2.1.1.4.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.4.3">5</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.5">
+										<div class="avatar" data-reactid=".2.1.1.5.0">
+											<img src="https://img3.doubanio.com/view/site/small/public/2cae85cae4544b3.jpg" data-reactid=".2.1.1.5.0.0">
+											<span class="icon" data-reactid=".2.1.1.5.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.5.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.5.1">墙上的花纹</h3>
+										<p data-reactid=".2.1.1.5.2">
+											<span data-reactid=".2.1.1.5.2.0">药路山</span>
+											<span data-reactid=".2.1.1.5.2.1"> / </span>
+											<span data-reactid=".2.1.1.5.2.2">1696</span>
+											<span data-reactid=".2.1.1.5.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.5.3">6</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.6">
+										<div class="avatar" data-reactid=".2.1.1.6.0">
+											<img src="https://img3.doubanio.com/view/sitesong/small/public/1489532840.jpg" data-reactid=".2.1.1.6.0.0">
+											<span class="icon" data-reactid=".2.1.1.6.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.6.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.6.1">风筝线 (Kite Line)</h3>
+										<p data-reactid=".2.1.1.6.2">
+											<span data-reactid=".2.1.1.6.2.0">林探惜</span>
+											<span data-reactid=".2.1.1.6.2.1"> / </span>
+											<span data-reactid=".2.1.1.6.2.2">5239</span>
+											<span data-reactid=".2.1.1.6.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.6.3">7</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.7">
+										<div class="avatar" data-reactid=".2.1.1.7.0">
+											<img src="https://img3.doubanio.com/view/site/small/public/5ffae830da70942.jpg" data-reactid=".2.1.1.7.0.0">
+											<span class="icon" data-reactid=".2.1.1.7.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.7.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.7.1">13 童话里不住人</h3>
+										<p data-reactid=".2.1.1.7.2">
+											<span data-reactid=".2.1.1.7.2.0">Spade Out of Space</span>
+											<span data-reactid=".2.1.1.7.2.1"> / </span>
+											<span data-reactid=".2.1.1.7.2.2">633</span>
+											<span data-reactid=".2.1.1.7.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.7.3">8</span>
+									</li><li class="artist-song" data-reactid=".2.1.1.8">
+										<div class="avatar" data-reactid=".2.1.1.8.0">
+											<img src="https://img3.doubanio.com/view/site/small/public/0420d19a01f3be5.jpg" data-reactid=".2.1.1.8.0.0">
+											<span class="icon" data-reactid=".2.1.1.8.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.8.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.8.1">Pulled Punches (Demo)</h3>
+										<p data-reactid=".2.1.1.8.2">
+											<span data-reactid=".2.1.1.8.2.0">Foster Parents</span>
+											<span data-reactid=".2.1.1.8.2.1"> / </span>
+											<span data-reactid=".2.1.1.8.2.2">5110</span>
+											<span data-reactid=".2.1.1.8.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.8.3">9</span>
+									</li>
+									<li class="artist-song" data-reactid=".2.1.1.9">
+										<div class="avatar" data-reactid=".2.1.1.9.0">
+											<img src="https://img3.doubanio.com/view/sitesong/small/public/1488186151.jpg" data-reactid=".2.1.1.9.0.0">
+											<span class="icon" data-reactid=".2.1.1.9.0.1">
+												<i class="icon-play" data-reactid=".2.1.1.9.0.1.0"></i>
+											</span>
+										</div>
+										<h3 data-reactid=".2.1.1.9.1">Mimida (demo)</h3>
+										<p data-reactid=".2.1.1.9.2">
+											<span data-reactid=".2.1.1.9.2.0">DVC</span>
+											<span data-reactid=".2.1.1.9.2.1"> / </span>
+											<span data-reactid=".2.1.1.9.2.2">436</span>
+											<span data-reactid=".2.1.1.9.2.3">次播放</span>
+										</p>
+										<span class="rank" data-reactid=".2.1.1.9.3">10</span>
+									</li>
+					            </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
