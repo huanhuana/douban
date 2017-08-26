@@ -1,3 +1,2 @@
 # douban
-尝试用bootstrap进行搭建豆瓣音乐，并用bootstrap提供的Carousel插件实现轮播，并且轻松方便的实现了了响应式布局，根据豆瓣的apiV2给出的接口结合jQuery的ajax进行数据交互；德邦采用ajax请求的数据动态生成dom，并集合了运用jQ写的轮播图及翻页组件。<br>
-德邦项目地址：https://github.com/huanhuana/debang
+尝试用bootstrap进行搭建豆瓣音乐，并用bootstrap提供的Carousel插件实现轮播，并且轻松方便的实现了了响应式布局，根据豆瓣的apiV2给出的接口结合jQuery的ajax进行数据交互。
